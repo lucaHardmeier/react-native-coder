@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colors from "../../constants/colors";
 
 export const styles = StyleSheet.create({
     inputContainer: {
@@ -14,5 +15,11 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
         height: 40,
         color: '',
+    },
+    button: {
+        color: colors.secondary,
+        backgroundColor: colors.secondary,
+        marginHorizontal: 5,
+        fontFamily: 'AleoRegular'
     }
 })

@@ -1,72 +1,39 @@
+import { useFonts } from 'expo-font';
 import { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
-import { AddPerson, CustomModal, PersonContainer } from './components';
+import { Text, View } from 'react-native';
+import { globalStyles } from './globalStyles';
+import MainScreen from './views/mainScreen/index';
+import PeopleScreen from './views/peopleScreen';
 
 export default function App() {
 
-  const [modalVisible, setModalVisible] = useState(false)
-  const [person, setPerson] = useState('')
-  const [money, setMoney] = useState('')
-  const [people, setPeople] = useState([])
+  const [view, setView] = useState('main')
 
-  const handleAddPerson = () => {
-    setPeople((prevPeople) => [
-      ...prevPeople,
-      { id: Date.now(), name: person, money: +money }
-    ])
-    setPerson('')
-    setMoney('')
-    setModalVisible(true)
+  const [loaded] = useFonts({
+    AleoBold: require('./assets/fonts/Aleo-Bold.ttf'),
+    AleoBoldItalic: require('./assets/fonts/Aleo-BoldItalic.ttf'),
+    AleoItalic: require('./assets/fonts/Aleo-Italic.ttf'),
+    AleoLight: require('./assets/fonts/Aleo-Light.ttf'),
+    AleoLightItalic: require('./assets/fonts/Aleo-LightItalic.ttf'),
+    AleoRegular: require('./assets/fonts/Aleo-Regular.ttf'),
+  })
+
+  if (!loaded) return <Text>Cargando...</Text>
+
+  const changeView = (view) => {
+    setView(view)
   }
 
-  const handleChangeText = (text) => {
-    setPerson(text)
-  }
-  const handleChangeMoney = (text) => {
-    setMoney(text)
+  let content = <MainScreen changeView={changeView} />
+
+  if (view === 'people') {
+    content = <PeopleScreen changeView={changeView} />
   }
 
-  const renderPeople = ({ item }) => (
-    <PersonContainer item={item} setPeople={setPeople} />
-  )
 
   return (
-    <View style={styles.container}>
-      <Text>Agrega una referencia para la persona y cuanto te adeuda:</Text>
-      <AddPerson
-        onChangeText={handleChangeText}
-        onChangeMoney={handleChangeMoney}
-        textButton='Agregar Deudor'
-        addPerson={handleAddPerson}
-        personName={person}
-        money={money}
-      />
-      <FlatList
-        data={people}
-        renderItem={renderPeople}
-        keyExtractor={item => item.id}
-      />
-      <CustomModal
-        animationType='slide'
-        visible={modalVisible}
-      >
-        <Text>Persona agregada correctamente</Text>
-        <Button
-          title='aceptar'
-          onPress={() => setModalVisible(false)}
-        />
-      </CustomModal>
+    <View style={globalStyles.page}>
+      {content}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 40
-  }
-});
