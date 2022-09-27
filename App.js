@@ -1,7 +1,8 @@
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { globalStyles } from './globalStyles';
+import AppNavigator from './navigation';
 import MainScreen from './views/mainScreen/index';
 import PeopleScreen from './views/peopleScreen';
 
@@ -18,7 +19,7 @@ export default function App() {
     AleoRegular: require('./assets/fonts/Aleo-Regular.ttf'),
   })
 
-  if (!loaded) return <Text>Cargando...</Text>
+  if (!loaded) return <ActivityIndicator />
 
   const changeView = (view) => {
     setView(view)
@@ -33,7 +34,7 @@ export default function App() {
 
   return (
     <View style={globalStyles.page}>
-      {content}
+      <AppNavigator />
     </View>
   );
 }

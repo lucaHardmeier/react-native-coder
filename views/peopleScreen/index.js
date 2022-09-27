@@ -5,7 +5,7 @@ import { Button, FlatList, Text, } from 'react-native';
 import { AddPerson, CustomModal, PersonContainer } from '../../components/index';
 import colors from '../../constants/colors';
 
-const PeopleScreen = ({ changeView }) => {
+const PeopleScreen = ({ navigation, changeView }) => {
 
     const [modalVisible, setModalVisible] = useState(false)
     const [person, setPerson] = useState('')
@@ -37,7 +37,7 @@ const PeopleScreen = ({ changeView }) => {
         <>
             <Button
                 title='Volver'
-                onPress={() => changeView('main')}
+                onPress={() => navigation.navigate('Home')}
                 color={colors.secondary}
             />
             <Text style={globalStyles.title1} >Agrega una referencia para la persona y cuanto te adeuda:</Text>

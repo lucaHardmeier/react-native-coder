@@ -12,12 +12,12 @@ const MainScreen = ({ changeView }) => {
             <View style={styles.menuContainer}>
                 <Button
                     title='Agregar personas'
-                    onPress={() => changeView('people')}
+                    onPress={() => navigation.navigate('People')}
                     color={colors.secondary}
                 />
                 <Button
                     title='Gastos'
-                    onPress={() => changeView('gastos')}
+                    onPress={() => navigation.navigate('Home')}
                     color={colors.secondary}
                 />
             </View>

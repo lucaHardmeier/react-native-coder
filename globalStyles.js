@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 import colors from "./constants/colors";
 
 export const globalStyles = StyleSheet.create({
@@ -8,7 +8,7 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: colors.primary,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 40,
+        paddingVertical: StatusBar.currentHeight + 10,
         paddingHorizontal: 20
     },
     title1: {
