@@ -14,6 +14,7 @@ export const globalStyles = StyleSheet.create({
     title1: {
         fontFamily: 'AleoBold',
         fontSize: 50,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        color: colors.black
     }
 });

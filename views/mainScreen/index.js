@@ -4,9 +4,9 @@ import colors from '../../constants/colors'
 import { globalStyles } from '../../globalStyles'
 import { styles } from './styles'
 
-const MainScreen = ({ changeView }) => {
+const MainScreen = ({ navigation }) => {
     return (
-        <>
+        <View style={globalStyles.page}>
             <Text style={globalStyles.title1} >OrganiVacas:</Text>
             <Text style={globalStyles.title1} >La app que organiza tus vacaciones por vos</Text>
             <View style={styles.menuContainer}>
@@ -21,7 +21,7 @@ const MainScreen = ({ changeView }) => {
                     color={colors.secondary}
                 />
             </View>
-        </>
+        </View>
     )
 }
 

@@ -1,7 +1,6 @@
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { globalStyles } from './globalStyles';
 import AppNavigator from './navigation';
 import MainScreen from './views/mainScreen/index';
 import PeopleScreen from './views/peopleScreen';
@@ -32,9 +31,5 @@ export default function App() {
   }
 
 
-  return (
-    <View style={globalStyles.page}>
-      <AppNavigator />
-    </View>
-  );
+  return <AppNavigator />
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { globalStyles } from '../../globalStyles'
 import { useState } from 'react';
-import { Button, FlatList, Text, } from 'react-native';
+import { Button, FlatList, Text, View, } from 'react-native';
 import { AddPerson, CustomModal, PersonContainer } from '../../components/index';
 import colors from '../../constants/colors';
 
@@ -34,12 +34,7 @@ const PeopleScreen = ({ navigation, changeView }) => {
     )
 
     return (
-        <>
-            <Button
-                title='Volver'
-                onPress={() => navigation.navigate('Home')}
-                color={colors.secondary}
-            />
+        <View style={globalStyles.page}>
             <Text style={globalStyles.title1} >Agrega una referencia para la persona y cuanto te adeuda:</Text>
             <AddPerson
                 onChangeText={handleChangeText}
@@ -65,7 +60,7 @@ const PeopleScreen = ({ navigation, changeView }) => {
                     color={colors.secondary}
                 />
             </CustomModal>
-        </>
+        </View>
     )
 }
 

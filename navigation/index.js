@@ -1,10 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native'
 import React from 'react'
-import MainNavigator from './MainNavigator'
+import TabNavigator from './TabNavigator'
 
 const AppNavigator = () => (
     <NavigationContainer>
-        <MainNavigator />
+        <TabNavigator />
     </NavigationContainer>
 )
 
