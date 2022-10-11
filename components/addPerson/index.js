@@ -15,7 +15,7 @@ const AddPerson = ({ personName, onChangeText, money, onChangeMoney, addPerson, 
                 value={personName}
 
             />
-            <TextInput
+            {/* <TextInput
                 style={styles.input}
                 placeholder='50.80'
                 selectionColor={selectionColor}
@@ -23,7 +23,7 @@ const AddPerson = ({ personName, onChangeText, money, onChangeMoney, addPerson, 
                 onChangeText={onChangeMoney}
                 value={money}
                 keyboardType='numeric'
-            />
+            /> */}
             <Button
                 title={textButton}
                 onPress={addPerson}

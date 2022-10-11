@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, Text, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import colors from '../../constants/colors'
+import { removePerson } from '../../store/actions/peopleActions.js'
 import { styles } from './styles'
 
 const PersonContainer = ({ item, setPeople }) => {
 
+    const dispatch = useDispatch()
+
     const [debt, setDebt] = useState(true)
 
     const handleDelete = (id) => {
-        setPeople((prevPeople) => prevPeople.filter(p => p.id !== id))
+        dispatch(removePerson(id))
     }
     const handleFinish = () => {
         setDebt(!debt)
@@ -16,7 +20,7 @@ const PersonContainer = ({ item, setPeople }) => {
 
     return (
         <View style={debt ? styles.debt : styles.noDebt}>
-            <Text style={styles.text}>{`${item.name} - $${item.money}`}</Text>
+            <Text style={styles.text}>{`${item.name} - $${item.outgo}`}</Text>
             <Button
                 color={colors.secondary}
                 title='Borrar'

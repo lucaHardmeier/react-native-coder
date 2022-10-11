@@ -1,7 +1,9 @@
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import { Provider } from 'react-redux';
 import AppNavigator from './navigation';
+import store from './store/reducers/index.js';
 import MainScreen from './views/mainScreen/index';
 import PeopleScreen from './views/peopleScreen';
 
@@ -30,6 +32,9 @@ export default function App() {
     content = <PeopleScreen changeView={changeView} />
   }
 
-
-  return <AppNavigator />
+  return (
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
+  )
 }

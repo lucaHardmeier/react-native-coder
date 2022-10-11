@@ -4,19 +4,23 @@ import { useState } from 'react';
 import { Button, FlatList, Text, View, } from 'react-native';
 import { AddPerson, CustomModal, PersonContainer } from '../../components/index';
 import colors from '../../constants/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPerson } from '../../store/actions/peopleActions.js';
 
 const PeopleScreen = ({ navigation, changeView }) => {
 
     const [modalVisible, setModalVisible] = useState(false)
     const [person, setPerson] = useState('')
     const [money, setMoney] = useState('')
-    const [people, setPeople] = useState([])
+
+    const dispatch = useDispatch()
+
+    const people = useSelector(state => state)
+
+    console.log(people)
 
     const handleAddPerson = () => {
-        setPeople((prevPeople) => [
-            ...prevPeople,
-            { id: Date.now(), name: person, money: +money }
-        ])
+        dispatch(addPerson(person))
         setPerson('')
         setMoney('')
         setModalVisible(true)
@@ -30,14 +34,14 @@ const PeopleScreen = ({ navigation, changeView }) => {
     }
 
     const renderPeople = ({ item }) => (
-        <PersonContainer item={item} setPeople={setPeople} />
+        <PersonContainer item={item} />
     )
 
     return (
         <View style={globalStyles.page}>
-            <Text style={globalStyles.title1} >Agrega una referencia para la persona y cuanto te adeuda:</Text>
+            <Text style={globalStyles.title1} >Agrega una referencia para la persona:</Text>
             <AddPerson
-                onChangeText={handleChangeText}
+                person onChangeText={handleChangeText}
                 onChangeMoney={handleChangeMoney}
                 textButton='Agregar Deudor'
                 addPerson={handleAddPerson}
