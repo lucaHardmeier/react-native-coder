@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import colors from '../constants/colors'
 import MainScreen from '../views/mainScreen'
+import NewPlaceScreen from '../views/newPlaceScreen/index.js'
 import PeopleScreen from '../views/peopleScreen'
 import PlacesScreen from '../views/placesScreen/index.js'
 
@@ -23,8 +24,9 @@ const MainNavigator = () => (
         }}
     >
         <Stack.Screen name='Home' component={MainScreen} />
-        <Stack.Screen name='People' component={PeopleScreen} />
-        <Stack.Screen name='Places' component={PlacesScreen} />
+        <Stack.Screen name='People' options={{ title: 'Personas' }} component={PeopleScreen} />
+        <Stack.Screen name='Places' options={{ title: 'Lugares' }} component={PlacesScreen} />
+        <Stack.Screen name='NewPlace' options={{ title: 'Agregar Lugar' }} component={NewPlaceScreen} />
     </Stack.Navigator>
 )
 

@@ -1,51 +1,35 @@
-import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import React from 'react'
 import { globalStyles } from '../../globalStyles.js'
 import { styles } from './styles.js'
-import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons'
+import colors from '../../constants/colors.js'
+import { PlaceContainer } from '../../components/index.js'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-const PlacesScreen = () => {
-
-    const [image, setImage] = useState()
-
-    const verifyPermissions = async () => {
-        const { status } = await ImagePicker.requestCameraPermissionsAsync()
-
-        if (status !== 'granted') {
-            Alert.alert(
-                'Permisos insuficientes',
-                'Necesita dar permisos a la cámara para usar esta funcionalidad',
-                [{ text: 'OK' }]
-            )
-            return false
-        }
-        return true
-    }
-
-    const handlerTakeImg = async () => {
-        const isCameraOk = verifyPermissions()
-        if (!isCameraOk) return
-
-        const img = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
-            aspect: [16, 9],
-            quality: 0.8
-        })
-
-        if (!img.cancelled)
-            setImage(img.uri)
-    }
+const PlacesScreen = ({ navigation }) => {
 
     return (
-        <View style={globalStyles.page}>
-            <Text style={globalStyles.title1} >Agrega una foto y la ubicación de un lugar:</Text>
-            <TextInput />
-            {image
-                ? <Image style={styles.img} source={{ uri: image }} />
-                : <Text>Selecciona una imagen para continuar</Text>}
-            <TouchableOpacity onPress={handlerTakeImg}>
-                <Text>Tomar foto</Text>
-            </TouchableOpacity>
+        <View style={styles.scrollContainer}>
+            <ScrollView contentContainerStyle={[globalStyles.page, styles.scrollView]}>
+                <View style={globalStyles.header}>
+                    <Text style={globalStyles.title1} >Tus lugares</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('NewPlace')}>
+                        <Ionicons
+                            name={'add-circle'}
+                            size={40}
+                            style={styles.icon}
+                            color={colors.black}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.placesContainer}>
+                    <PlaceContainer />
+                    <PlaceContainer />
+                    <PlaceContainer />
+
+                </View>
+            </ScrollView>
         </View>
     )
 }
