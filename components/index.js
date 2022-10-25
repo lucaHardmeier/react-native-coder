@@ -1,3 +1,3 @@
-export { default as CustomModal } from './modal/index'
-export { default as AddPerson } from './addPerson/index'
-export { default as PersonContainer } from './personContainer/index'
+export { default as CustomModal } from './modal'
+export { default as AddPerson } from './addPerson'
+export { default as PersonContainer } from './personContainer'

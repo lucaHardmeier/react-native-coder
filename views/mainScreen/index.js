@@ -20,6 +20,11 @@ const MainScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate('Home')}
                     color={colors.secondary}
                 />
+                <Button
+                    title='Lugares'
+                    onPress={() => navigation.navigate('Places')}
+                    color={colors.secondary}
+                />
             </View>
         </View>
     )
