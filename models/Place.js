@@ -1,9 +1,9 @@
 class Place {
-    constructor(id, title, img, notes, telephoneNum) {
+    constructor(id, title, img, adress, telephoneNum) {
         this.id = id
         this.title = title
         this.img = img
-        this.notes = notes
+        this.adress = adress
         this.telephoneNum = telephoneNum
     }
 

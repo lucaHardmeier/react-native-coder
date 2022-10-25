@@ -1,5 +1,5 @@
 import Place from "../../models/Place.js"
-import { ADD_PLACE } from "../types/placesTypes.js"
+import { ADD_PLACE, LOAD_PLACES } from "../types/placesTypes.js"
 
 const initialState = []
 
@@ -9,10 +9,10 @@ const placesReducer = (state = initialState, action) => {
     switch (type) {
         case ADD_PLACE:
             const newPlace = {
-                id: Date.now(),
+                id: payload.id,
                 title: payload.title,
                 img: payload.img,
-                notes: payload.notes,
+                adress: payload.adress,
                 telephoneNum: payload.telephoneNum
             }
 
@@ -20,6 +20,8 @@ const placesReducer = (state = initialState, action) => {
                 ...state,
                 newPlace
             ]
+        case LOAD_PLACES:
+            return payload
         default:
             return state
     }

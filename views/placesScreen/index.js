@@ -1,22 +1,33 @@
 import { View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { globalStyles } from '../../globalStyles.js'
 import { styles } from './styles.js'
 import { Ionicons } from '@expo/vector-icons'
 import colors from '../../constants/colors.js'
 import { PlaceContainer } from '../../components/index.js'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadPlaces } from '../../store/actions/placesActions.js'
 
 const PlacesScreen = ({ navigation }) => {
 
     const places = useSelector(state => state.places)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+
+        const fetchDb = async () => {
+            dispatch(await loadPlaces())
+        }
+        fetchDb()
+            .catch(err => console.log(err))
+    }, [])
 
     const renderItem = ({ item }) => (
         <PlaceContainer
             title={item.title}
             img={item.img}
             telephoneNum={item.telephoneNum}
-            notes={item.notes}
+            adress={item.adress}
         />)
 
     return (

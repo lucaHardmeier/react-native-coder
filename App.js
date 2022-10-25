@@ -2,14 +2,11 @@ import { useFonts } from 'expo-font';
 import { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { Provider } from 'react-redux';
+import { init } from './db/index.js';
 import AppNavigator from './navigation';
 import store from './store/reducers/index.js';
-import MainScreen from './views/mainScreen/index';
-import PeopleScreen from './views/peopleScreen';
 
 export default function App() {
-
-  const [view, setView] = useState('main')
 
   const [loaded] = useFonts({
     AleoBold: require('./assets/fonts/Aleo-Bold.ttf'),
@@ -22,15 +19,13 @@ export default function App() {
 
   if (!loaded) return <ActivityIndicator />
 
-  const changeView = (view) => {
-    setView(view)
-  }
-
-  let content = <MainScreen changeView={changeView} />
-
-  if (view === 'people') {
-    content = <PeopleScreen changeView={changeView} />
-  }
+  init()
+    .then(() => {
+      console.log('Initialized database')
+    })
+    .catch(err => {
+      console.error('Initializing db failed', err)
+    })
 
   return (
     <Provider store={store}>

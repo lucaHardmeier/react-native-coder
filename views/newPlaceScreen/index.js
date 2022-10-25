@@ -15,7 +15,7 @@ const NewPlaceScreen = ({ navigation }) => {
     const [title, setTitle] = useState("")
     const [img, setImg] = useState()
     const [telephoneNum, setTelephoneNum] = useState("")
-    const [notes, setNotes] = useState("")
+    const [adress, setAdress] = useState("")
 
     const verifyPermissions = async () => {
         const { status } = await ImagePicker.requestCameraPermissionsAsync()
@@ -51,11 +51,11 @@ const NewPlaceScreen = ({ navigation }) => {
     const onChangeTel = (text) => {
         setTelephoneNum(text)
     }
-    const onChangeNotes = (text) => {
-        setNotes(text)
+    const onChangeAdress = (text) => {
+        setAdress(text)
     }
-    const handleSubmit = () => {
-        dispatch(addPlace(title, img, telephoneNum, notes))
+    const handleSubmit = async () => {
+        dispatch(await addPlace(title, img, telephoneNum, adress))
         navigation.navigate('Places')
     }
 
@@ -77,9 +77,9 @@ const NewPlaceScreen = ({ navigation }) => {
                 />
                 <TextInput
                     style={globalStyles.input}
-                    placeholder='Notas'
-                    onChangeText={onChangeNotes}
-                    value={notes}
+                    placeholder='Dirección'
+                    onChangeText={onChangeAdress}
+                    value={adress}
                 />
                 {img && <Image style={styles.img} source={{ uri: img }} />}
                 <TouchableOpacity onPress={handlerTakeImg}>
