@@ -5,11 +5,15 @@ import { styles } from './styles.js'
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons'
 import colors from '../../constants/colors.js';
+import { useDispatch } from 'react-redux';
+import { addPlace } from '../../store/actions/placesActions.js';
 
-const NewPlaceScreen = () => {
+const NewPlaceScreen = ({ navigation }) => {
 
-    const [image, setImage] = useState()
+    const dispatch = useDispatch()
+
     const [title, setTitle] = useState("")
+    const [img, setImg] = useState()
     const [telephoneNum, setTelephoneNum] = useState("")
     const [notes, setNotes] = useState("")
 
@@ -38,7 +42,7 @@ const NewPlaceScreen = () => {
         })
 
         if (!img.cancelled)
-            setImage(img.uri)
+            setImg(img.uri)
     }
 
     const onChangeTitle = (text) => {
@@ -51,12 +55,13 @@ const NewPlaceScreen = () => {
         setNotes(text)
     }
     const handleSubmit = () => {
-
+        dispatch(addPlace(title, img, telephoneNum, notes))
+        navigation.navigate('Places')
     }
 
     return (
         <View style={globalStyles.page}>
-            <Text style={{ ...globalStyles.title1, ...styles.title }} >Completa los datos de la nueva ubicación:</Text>
+            <Text style={{ ...globalStyles.title1, ...styles.title }} >Completa los datos de una nueva ubicación:</Text>
             <View style={styles.container}>
                 <TextInput
                     style={globalStyles.input}
@@ -68,15 +73,15 @@ const NewPlaceScreen = () => {
                     style={globalStyles.input}
                     placeholder='Teléfono'
                     onChangeText={onChangeTel}
-                    value={title}
+                    value={telephoneNum}
                 />
                 <TextInput
                     style={globalStyles.input}
                     placeholder='Notas'
                     onChangeText={onChangeNotes}
-                    value={title}
+                    value={notes}
                 />
-                {image && <Image style={styles.img} source={{ uri: image }} />}
+                {img && <Image style={styles.img} source={{ uri: img }} />}
                 <TouchableOpacity onPress={handlerTakeImg}>
                     <Ionicons
                         name={'camera'}

@@ -1,19 +1,17 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { styles } from './styles.js'
 
 const PlaceContainer = ({ title, img, telephoneNum, notes }) => {
+    console.log(img)
     return (
         <View style={styles.placeContainer}>
             <View>
-                <Text style={styles.title}>Título</Text>
-                <Text style={styles.text}>Imagen</Text>
-                <Text style={styles.text}>Número de telefono</Text>
-                <Text style={styles.text}>Notas</Text>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.text}>{telephoneNum}</Text>
+                <Text style={styles.text}>{notes}</Text>
             </View>
-            <View style={styles.imgContainer}>
-
-            </View>
+            {img && <Image style={styles.imgContainer} source={{ uri: img }} />}
         </View>
     )
 }

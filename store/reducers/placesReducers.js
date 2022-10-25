@@ -8,7 +8,14 @@ const placesReducer = (state = initialState, action) => {
 
     switch (type) {
         case ADD_PLACE:
-            const newPlace = new Place(Date.now(), payload.title, payload.img, payload.notes, payload.telephoneNum)
+            const newPlace = {
+                id: Date.now(),
+                title: payload.title,
+                img: payload.img,
+                notes: payload.notes,
+                telephoneNum: payload.telephoneNum
+            }
+
             return [
                 ...state,
                 newPlace
