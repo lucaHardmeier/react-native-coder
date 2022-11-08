@@ -58,12 +58,12 @@ export const getPlaces = () => {
 }
 
 
-export const insertEntrie = (reference, id_creditor, id_debtor, amount) => {
+export const insertEntry = (reference, id_creditor, id_debtor, amount, timestamp) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
                 'INSERT INTO entries (reference, id_creditor, id_debtor, amount, timestamp) VALUES (?,?,?,?,?);',
-                [reference, id_creditor, id_debtor.join(), amount, Date.now()],
+                [reference, id_creditor, id_debtor.join(), amount, timestamp],
                 (_, result) => resolve(result),
                 (_, err) => reject(err)
             )
@@ -85,6 +85,20 @@ export const getEntries = () => {
                     console.log(result)
                     resolve(result)
                 },
+                (_, err) => reject(err)
+            )
+        })
+    })
+    return promise
+}
+
+export const deleteEntry = (id) => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'DELETE FROM entries WHERE id = ?;',
+                [id],
+                (_, result) => resolve(result),
                 (_, err) => reject(err)
             )
         })
