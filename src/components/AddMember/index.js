@@ -4,24 +4,24 @@ import colors from '../../constants/colors'
 import { globalStyles } from '../../globalStyles.js'
 import { styles } from './styles'
 
-const AddPerson = ({ personName, onChangeText, money, onChangeMoney, addPerson, selectionColor, textButton }) => {
+const AddMember = ({ memberName, onChangeText, addMember }) => {
     return (
         <View style={styles.inputContainer}>
             <TextInput
                 style={globalStyles.input}
                 placeholder='Juan Pérez'
-                selectionColor={selectionColor}
+                selectionColor={colors.white}
                 placeholderTextColor={colors.secondary}
                 onChangeText={onChangeText}
-                value={personName}
+                value={memberName}
             />
             <Button
-                title={textButton}
-                onPress={addPerson}
+                title='Agregar miembro'
+                onPress={addMember}
                 color={colors.secondary}
             />
         </View>
     )
 }
 
-export default AddPerson
+export default AddMember

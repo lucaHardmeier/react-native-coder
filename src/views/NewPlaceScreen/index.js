@@ -86,7 +86,6 @@ const NewPlaceScreen = ({ navigation }) => {
                     <Ionicons
                         name={'camera'}
                         size={40}
-                        style={styles.icon}
                         color={colors.black}
                     />
                 </TouchableOpacity>

@@ -3,7 +3,7 @@ import React from 'react'
 import MainNavigator from './MainNavigator'
 import { Ionicons } from '@expo/vector-icons'
 import colors from '../constants/colors'
-import BillsScreen from '../views/billsScreen'
+import BillsScreen from '../views/BillsScreen'
 
 const BottomTabs = createBottomTabNavigator()
 

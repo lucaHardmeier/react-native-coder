@@ -14,7 +14,6 @@ const PlacesScreen = ({ navigation }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-
         const fetchDb = async () => {
             dispatch(await loadPlaces())
         }

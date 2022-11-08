@@ -2,55 +2,51 @@ import React from 'react'
 import { globalStyles } from '../../globalStyles'
 import { useState } from 'react';
 import { Button, FlatList, Text, View, } from 'react-native';
-import { AddPerson, CustomModal, PersonContainer } from '../../components/index';
+import { AddMember, CustomModal, MemberContainer } from '../../components';
 import colors from '../../constants/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPerson } from '../../store/actions/peopleActions.js';
+import { addMember, loadMembers } from '../../store/actions/membersActions.js';
+import { useEffect } from 'react';
 
-const PeopleScreen = ({ navigation, changeView }) => {
+const MembersScreen = ({ navigation, changeView }) => {
 
     const [modalVisible, setModalVisible] = useState(false)
-    const [person, setPerson] = useState('')
-    const [money, setMoney] = useState('')
+    const [memberName, setMemberName] = useState('')
 
+    const members = useSelector(state => state.members)
     const dispatch = useDispatch()
 
-    const people = useSelector(state => state)
+    useEffect(() => {
+        const fetchDb = async () => {
+            dispatch(await loadMembers())
+        }
+        fetchDb()
+            .catch(err => console.log(err))
+    }, [])
 
-    console.log(people)
-
-    const handleAddPerson = () => {
-        dispatch(addPerson(person))
-        setPerson('')
-        setMoney('')
+    const handleAddMember = async () => {
+        dispatch(await addMember(memberName))
+        setMemberName('')
         setModalVisible(true)
     }
 
     const handleChangeText = (text) => {
-        setPerson(text)
-    }
-    const handleChangeMoney = (text) => {
-        setMoney(text)
+        setMemberName(text)
     }
 
-    const renderPeople = ({ item }) => (
-        <PersonContainer item={item} />
-    )
+    const renderMembers = ({ item }) => <MemberContainer item={item} />
 
     return (
         <View style={globalStyles.page}>
             <Text style={globalStyles.title1} >Agrega una referencia para la persona:</Text>
-            <AddPerson
-                person onChangeText={handleChangeText}
-                onChangeMoney={handleChangeMoney}
-                textButton='Agregar Deudor'
-                addPerson={handleAddPerson}
-                personName={person}
-                money={money}
+            <AddMember
+                memberName={memberName}
+                onChangeText={handleChangeText}
+                addMember={handleAddMember}
             />
             <FlatList
-                data={people}
-                renderItem={renderPeople}
+                data={members}
+                renderItem={renderMembers}
                 keyExtractor={item => item.id}
             />
             <CustomModal
@@ -68,4 +64,4 @@ const PeopleScreen = ({ navigation, changeView }) => {
     )
 }
 
-export default PeopleScreen
+export default MembersScreen

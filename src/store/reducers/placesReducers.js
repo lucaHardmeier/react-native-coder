@@ -1,9 +1,6 @@
-import Place from "../../models/Place.js"
 import { ADD_PLACE, LOAD_PLACES } from "../types/placesTypes.js"
 
-const initialState = []
-
-const placesReducer = (state = initialState, action) => {
+const placesReducer = (state = [], action) => {
     const { type, payload } = action
 
     switch (type) {
